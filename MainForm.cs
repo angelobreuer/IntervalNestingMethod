@@ -73,9 +73,45 @@
         /// <param name="eventArgs">the event arguments passed with the event</param>
         private void FormulaTextBox_TextChanged(object sender, EventArgs eventArgs)
         {
+            Rerender();
+        }
+
+        private void MaximumRangeNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (maximumRangeNumericUpDown.Value < minimumRangeNumericUpDown.Value)
+            {
+                minimumRangeNumericUpDown.Value = maximumRangeNumericUpDown.Value;
+            }
+
+            Rerender();
+        }
+
+        private void MinimumRangeNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (minimumRangeNumericUpDown.Value > maximumRangeNumericUpDown.Value)
+            {
+                maximumRangeNumericUpDown.Value = minimumRangeNumericUpDown.Value;
+            }
+
+            Rerender();
+        }
+
+        /// <summary>
+        ///     An event handler that is invoked when the next button is clicked.
+        /// </summary>
+        /// <param name="sender">the event sender</param>
+        /// <param name="eventArgs">the event arguments passed with the event</param>
+        private void NextButton_Click(object sender, EventArgs eventArgs)
+        {
+            FindNullPoint();
+        }
+
+        private void Rerender()
+        {
             if (string.IsNullOrWhiteSpace(formulaTextBox.Text))
             {
                 formularStatusLabel.Text = "Bitte Formel eingeben.";
+                formularStatusLabel.ForeColor = Color.Red;
                 calculationPanel.Enabled = false;
                 return;
             }
@@ -85,11 +121,13 @@
             if (expression.HasErrors())
             {
                 formularStatusLabel.Text = "Fehler in der Formel: " + expression.Error;
+                formularStatusLabel.ForeColor = Color.Red;
                 calculationPanel.Enabled = false;
                 return;
             }
 
             formularStatusLabel.Text = "Formel ist gültig.";
+            formularStatusLabel.ForeColor = Color.Green;
 
             double Evaluate(double value)
             {
@@ -124,7 +162,11 @@
                 return 0D;
             }
 
-            _nullPointFinder = new NullPointFinder(Evaluate);
+            _nullPointFinder = new NullPointFinder(
+                func: Evaluate,
+                minimum: (double)minimumRangeNumericUpDown.Value,
+                maximum: (double)maximumRangeNumericUpDown.Value);
+
             _intervalHistory = new IntervalHistory();
             _lastValueLine = null;
 
@@ -135,16 +177,6 @@
             formsPlot1.plt.PlotVLine(0, Color.Green);
             formsPlot1.plt.PlotHLine(0, Color.Green);
             formsPlot1.Render();
-        }
-
-        /// <summary>
-        ///     An event handler that is invoked when the next button is clicked.
-        /// </summary>
-        /// <param name="sender">the event sender</param>
-        /// <param name="eventArgs">the event arguments passed with the event</param>
-        private void NextButton_Click(object sender, EventArgs eventArgs)
-        {
-            FindNullPoint();
         }
 
         /// <summary>

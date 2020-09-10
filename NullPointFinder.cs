@@ -13,16 +13,17 @@
         ///     Initializes a new instance of the <see cref="NullPointFinder"/> class.
         /// </summary>
         /// <param name="func">the function used to find the null-points for</param>
-        /// <param name="span">the span to find null-points in</param>
+        /// <param name="minimum">the minimum X-value of the search are</param>
+        /// <param name="maximum">the maximum X-value of the search are</param>
         /// <exception cref="ArgumentNullException">
         ///     thrown if the specified <paramref name="func"/> is <see langword="null"/>.
         /// </exception>
-        public NullPointFinder(Func<double, double> func, double span = 10000D)
+        public NullPointFinder(Func<double, double> func, double minimum = -10000D, double maximum = 10000D)
         {
             _func = func ?? throw new ArgumentNullException(nameof(func));
 
-            Maximum = Math.Abs(span);
-            Minimum = -Maximum;
+            Minimum = minimum;
+            Maximum = maximum;
         }
 
         /// <summary>
