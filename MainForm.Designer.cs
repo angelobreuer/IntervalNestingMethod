@@ -35,17 +35,17 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.calculationPanel = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.speedTrackBar = new System.Windows.Forms.TrackBar();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
+            this.nextButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.formularStatusLabel = new System.Windows.Forms.Label();
-            this.formularTextBox = new System.Windows.Forms.TextBox();
+            this.formulaTextBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.calculationPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.speedTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // formsPlot1
@@ -78,7 +78,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.formularStatusLabel);
-            this.panel1.Controls.Add(this.formularTextBox);
+            this.panel1.Controls.Add(this.formulaTextBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(738, 0);
             this.panel1.Name = "panel1";
@@ -88,10 +88,10 @@
             // calculationPanel
             // 
             this.calculationPanel.Controls.Add(this.label3);
-            this.calculationPanel.Controls.Add(this.trackBar1);
-            this.calculationPanel.Controls.Add(this.button3);
-            this.calculationPanel.Controls.Add(this.button2);
-            this.calculationPanel.Controls.Add(this.button1);
+            this.calculationPanel.Controls.Add(this.speedTrackBar);
+            this.calculationPanel.Controls.Add(this.stopButton);
+            this.calculationPanel.Controls.Add(this.startButton);
+            this.calculationPanel.Controls.Add(this.nextButton);
             this.calculationPanel.Enabled = false;
             this.calculationPanel.Location = new System.Drawing.Point(12, 108);
             this.calculationPanel.Name = "calculationPanel";
@@ -111,45 +111,45 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(7, 51);
-            this.trackBar1.Maximum = 1000;
-            this.trackBar1.Minimum = 1;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.trackBar1.Size = new System.Drawing.Size(349, 45);
-            this.trackBar1.TabIndex = 14;
-            this.trackBar1.Value = 1000;
-            this.trackBar1.Scroll += new System.EventHandler(this.TrackBar1_Scroll);
+            this.speedTrackBar.Location = new System.Drawing.Point(7, 51);
+            this.speedTrackBar.Maximum = 1000;
+            this.speedTrackBar.Minimum = 1;
+            this.speedTrackBar.Name = "trackBar1";
+            this.speedTrackBar.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.speedTrackBar.Size = new System.Drawing.Size(349, 45);
+            this.speedTrackBar.TabIndex = 14;
+            this.speedTrackBar.Value = 1000;
+            this.speedTrackBar.Scroll += new System.EventHandler(this.SpeedTrackBar_Scroll);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(168, 22);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "Stop";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3_Click);
+            this.stopButton.Location = new System.Drawing.Point(168, 22);
+            this.stopButton.Name = "button3";
+            this.stopButton.Size = new System.Drawing.Size(75, 23);
+            this.stopButton.TabIndex = 13;
+            this.stopButton.Text = "Stop";
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(87, 22);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Start";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            this.startButton.Location = new System.Drawing.Point(87, 22);
+            this.startButton.Name = "button2";
+            this.startButton.Size = new System.Drawing.Size(75, 23);
+            this.startButton.TabIndex = 12;
+            this.startButton.Text = "Start";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(8, 22);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Weiter";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.nextButton.Location = new System.Drawing.Point(8, 22);
+            this.nextButton.Name = "button1";
+            this.nextButton.Size = new System.Drawing.Size(75, 23);
+            this.nextButton.TabIndex = 11;
+            this.nextButton.Text = "Weiter";
+            this.nextButton.UseVisualStyleBackColor = true;
+            this.nextButton.Click += new System.EventHandler(this.NextButton_Click);
             // 
             // label1
             // 
@@ -180,11 +180,11 @@
             // 
             // formularTextBox
             // 
-            this.formularTextBox.Location = new System.Drawing.Point(57, 36);
-            this.formularTextBox.Name = "formularTextBox";
-            this.formularTextBox.Size = new System.Drawing.Size(317, 23);
-            this.formularTextBox.TabIndex = 3;
-            this.formularTextBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
+            this.formulaTextBox.Location = new System.Drawing.Point(57, 36);
+            this.formulaTextBox.Name = "formularTextBox";
+            this.formulaTextBox.Size = new System.Drawing.Size(317, 23);
+            this.formulaTextBox.TabIndex = 3;
+            this.formulaTextBox.TextChanged += new System.EventHandler(this.FormulaTextBox_TextChanged);
             // 
             // MainForm
             // 
@@ -199,7 +199,7 @@
             this.panel1.PerformLayout();
             this.calculationPanel.ResumeLayout(false);
             this.calculationPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.speedTrackBar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -211,14 +211,14 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox calculationPanel;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TrackBar speedTrackBar;
+        private System.Windows.Forms.Button stopButton;
+        private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.Button nextButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label formularStatusLabel;
-        private System.Windows.Forms.TextBox formularTextBox;
+        private System.Windows.Forms.TextBox formulaTextBox;
         private System.Windows.Forms.Label label3;
     }
 }

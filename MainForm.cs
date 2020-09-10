@@ -6,6 +6,9 @@
     using NCalc;
     using ScottPlot;
 
+    /// <summary>
+    ///     The initial main form.
+    /// </summary>
     public partial class MainForm : Form
     {
         private IntervalHistory _intervalHistory;
@@ -13,26 +16,17 @@
         private PlottableVLine _lastValueLine;
         private NullPointFinder _nullPointFinder;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MainForm"/> class.
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
         }
 
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            FindNullPoint();
-        }
-
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            timer1.Enabled = true;
-        }
-
-        private void Button3_Click(object sender, EventArgs e)
-        {
-            timer1.Enabled = false;
-        }
-
+        /// <summary>
+        ///     Renders the next null-point guess.
+        /// </summary>
         private void FindNullPoint()
         {
             if (_nullPointFinder is null)
@@ -72,16 +66,21 @@
             }
         }
 
-        private void TextBox1_TextChanged(object sender, EventArgs e)
+        /// <summary>
+        ///     An event handler that is invoked when the formula text box was edited.
+        /// </summary>
+        /// <param name="sender">the event sender</param>
+        /// <param name="eventArgs">the event arguments passed with the event</param>
+        private void FormulaTextBox_TextChanged(object sender, EventArgs eventArgs)
         {
-            if (string.IsNullOrWhiteSpace(formularTextBox.Text))
+            if (string.IsNullOrWhiteSpace(formulaTextBox.Text))
             {
                 formularStatusLabel.Text = "Bitte Formel eingeben.";
                 calculationPanel.Enabled = false;
                 return;
             }
 
-            var expression = new Expression(formularTextBox.Text, EvaluateOptions.NoCache);
+            var expression = new Expression(formulaTextBox.Text, EvaluateOptions.NoCache);
 
             if (expression.HasErrors())
             {
@@ -138,15 +137,55 @@
             formsPlot1.Render();
         }
 
-        private void Timer1_Tick(object sender, EventArgs e)
+        /// <summary>
+        ///     An event handler that is invoked when the next button is clicked.
+        /// </summary>
+        /// <param name="sender">the event sender</param>
+        /// <param name="eventArgs">the event arguments passed with the event</param>
+        private void NextButton_Click(object sender, EventArgs eventArgs)
         {
             FindNullPoint();
         }
 
-        private void TrackBar1_Scroll(object sender, EventArgs e)
+        /// <summary>
+        ///     An event handler that is invoked when the timer ticks.
+        /// </summary>
+        /// <param name="sender">the event sender</param>
+        /// <param name="eventArgs">the event arguments passed with the event</param>
+        private void SpeedTrackBar_Scroll(object sender, EventArgs eventArgs)
         {
-            timer1.Interval = trackBar1.Value;
-            label3.Text = $"Geschwindigkeit: {trackBar1.Value}ms pro Update";
+            timer1.Interval = speedTrackBar.Value;
+            label3.Text = $"Geschwindigkeit: {speedTrackBar.Value}ms pro Update";
+        }
+
+        /// <summary>
+        ///     An event handler that is invoked when the start button is clicked.
+        /// </summary>
+        /// <param name="sender">the event sender</param>
+        /// <param name="eventArgs">the event arguments passed with the event</param>
+        private void StartButton_Click(object sender, EventArgs eventArgs)
+        {
+            timer1.Enabled = true;
+        }
+
+        /// <summary>
+        ///     An event handler that is invoked when the stop button is clicked.
+        /// </summary>
+        /// <param name="sender">the event sender</param>
+        /// <param name="eventArgs">the event arguments passed with the event</param>
+        private void StopButton_Click(object sender, EventArgs eventArgs)
+        {
+            timer1.Enabled = false;
+        }
+
+        /// <summary>
+        ///     An event handler that is invoked when the timer ticks.
+        /// </summary>
+        /// <param name="sender">the event sender</param>
+        /// <param name="eventArgs">the event arguments passed with the event</param>
+        private void Timer1_Tick(object sender, EventArgs eventArgs)
+        {
+            FindNullPoint();
         }
     }
 }

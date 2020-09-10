@@ -3,6 +3,9 @@ namespace IntervalNestingMethod
     using System;
     using System.Windows.Forms;
 
+    /// <summary>
+    ///     Contains the main entry point.
+    /// </summary>
     internal static class Program
     {
         /// <summary>
